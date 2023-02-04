@@ -16,8 +16,24 @@ public class SocialMediaController {
      */
     public Javalin startAPI() {
         Javalin app = Javalin.create();
-        app.get("example-endpoint", this::exampleHandler);
+        app.post("localhost:8080/register", ctx -> {
+            System.out.println(ctx.body());
+            ObjectMapper om = new ObjectMapper();
+            Account account = om.readValue(ctx.body(), Account.class);
+            Account addedAccount = AccountService.addAccount(account);
+            if(username == null || username.isBlank() || password == null || password.length() < 4){
+                ctx.status(400);
+                
+            }else{
+                ctx.json(om.writeValueAsString(addedAccount));
+            }
+    
+        });
 
+        app.get("localhost:8080/register", ctx -> {
+
+        });
+        
         return app;
     }
 
