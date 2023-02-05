@@ -1,5 +1,7 @@
 package Controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -16,24 +18,45 @@ public class SocialMediaController {
      */
     public Javalin startAPI() {
         Javalin app = Javalin.create();
+        ObjectMapper om = new ObjectMapper();
+
+        //#1 Account registration
+        private void accountRegistrationHandler(Context ctx) throws JsonProcessingException {
         app.post("localhost:8080/register", ctx -> {
-            System.out.println(ctx.body());
-            ObjectMapper om = new ObjectMapper();
+              
             Account account = om.readValue(ctx.body(), Account.class);
-            Account addedAccount = AccountService.addAccount(account);
-            if(username == null || username.isBlank() || password == null || password.length() < 4){
+            Account createdAccount = userRegistrationService.addAccount(account);
+            if(createdAccount == null || createdAccount.isBlank() || password == null || password.length() < 4){
                 ctx.status(400);
                 
             }else{
-                ctx.json(om.writeValueAsString(addedAccount));
+                ctx.json(om.writeValueAsString(createdAccount));
             }
+     });}
     
-        });
 
-        app.get("localhost:8080/register", ctx -> {
-
-        });
+     //#2 login
+     app.post("localhost:8080/login", ctx -> {
         
+     });
+        
+//#3 creation of new messages
+    app.post("localhost:8080/messages", ctx -> {
+    
+        Message message = om.readValue(ctx.body(), Message.class);
+        Message newMessage = messageService.addMessage(message);
+        if(!message.getMessageText().isBlank() && message.getMessageText().length() < 255 && userExists(message.getPostedBy())) {
+            int messageId = persistMessage(message);
+            message.setMessageId(messageId);
+            ctx.json(message);
+            ){
+            ctx.json(om.writeValueAsString(newMessage));
+        }else{
+            ctx.status(400);
+        }
+
+    );}}
+
         return app;
     }
 
