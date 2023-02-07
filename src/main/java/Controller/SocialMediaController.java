@@ -1,7 +1,10 @@
 package Controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import Model.Account;
+import Service.SocialMediaBlogService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
@@ -10,7 +13,11 @@ import io.javalin.http.Context;
  * found in readme.md as well as the test cases. You should
  * refer to prior mini-project labs and lecture materials for guidance on how a controller may be built.
  */
+
+
 public class SocialMediaController {
+
+    public SocialMediaBlogService socialMediaBlogService;
     /**
      * In order for the test cases to work, you will need to write the endpoints in the startAPI() method, as the test
      * suite must receive a Javalin object from this method.
@@ -18,21 +25,26 @@ public class SocialMediaController {
      */
     public Javalin startAPI() {
         Javalin app = Javalin.create();
-        ObjectMapper om = new ObjectMapper();
+        socialMediaBlogService = new SocialMediaBlogService ();
+        
 
         //#1 Account registration
+        
+        app.post("localhost:8080/register", this::accountRegistrationHandler);
+    }
+        
         private void accountRegistrationHandler(Context ctx) throws JsonProcessingException {
-        app.post("localhost:8080/register", ctx -> {
-              
+            
+            ObjectMapper om = new ObjectMapper();
             Account account = om.readValue(ctx.body(), Account.class);
-            Account createdAccount = userRegistrationService.addAccount(account);
-            if(createdAccount == null || createdAccount.isBlank() || password == null || password.length() < 4){
+            Account createdAccount = socialMediaBlogService.addAccount(account);
+            if(createdAccount == null || createdAccount.isBlank() || account.getUsername() == null || account.getPassword().length() < 4){
                 ctx.status(400);
                 
             }else{
                 ctx.json(om.writeValueAsString(createdAccount));
             }
-     });}
+     }
     
 
      //#2 login
@@ -69,4 +81,3 @@ public class SocialMediaController {
     }
 
 
-}

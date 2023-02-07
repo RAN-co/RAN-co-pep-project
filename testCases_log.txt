@@ -15,41 +15,39 @@
 [INFO] -------------------------------------------------------------
 [ERROR] COMPILATION ERROR : 
 [INFO] -------------------------------------------------------------
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[24,9] illegal start of expression
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[39,14] <identifier> expected
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[39,15] illegal start of type
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[41,7] illegal start of type
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[44,13] <identifier> expected
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[44,14] illegal start of type
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[52,13] illegal start of expression
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[54,10] 'else' without 'if'
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[58,5] illegal start of expression
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[60,9] illegal start of type
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[60,19] <identifier> expected
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[67,13] class, interface, or enum expected
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[69,5] class, interface, or enum expected
-[INFO] 13 errors 
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[51,14] <identifier> expected
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[51,15] illegal start of type
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[53,7] illegal start of type
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[56,13] <identifier> expected
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[56,14] illegal start of type
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[64,13] illegal start of expression
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[66,10] 'else' without 'if'
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[70,5] illegal start of expression
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[72,9] illegal start of type
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[72,19] <identifier> expected
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[79,13] class, interface, or enum expected
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[81,5] class, interface, or enum expected
+[INFO] 12 errors 
 [INFO] -------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.724 s
-[INFO] Finished at: 2023-02-05T16:49:17Z
+[INFO] Total time:  3.216 s
+[INFO] Finished at: 2023-02-07T20:35:27Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project Challenges: Compilation failure: Compilation failure: 
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[24,9] illegal start of expression
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[39,14] <identifier> expected
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[39,15] illegal start of type
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[41,7] illegal start of type
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[44,13] <identifier> expected
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[44,14] illegal start of type
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[52,13] illegal start of expression
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[54,10] 'else' without 'if'
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[58,5] illegal start of expression
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[60,9] illegal start of type
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[60,19] <identifier> expected
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[67,13] class, interface, or enum expected
-[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[69,5] class, interface, or enum expected
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[51,14] <identifier> expected
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[51,15] illegal start of type
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[53,7] illegal start of type
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[56,13] <identifier> expected
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[56,14] illegal start of type
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[64,13] illegal start of expression
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[66,10] 'else' without 'if'
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[70,5] illegal start of expression
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[72,9] illegal start of type
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[72,19] <identifier> expected
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[79,13] class, interface, or enum expected
+[ERROR] /workspace/RAN-co-pep-project/src/main/java/Controller/SocialMediaController.java:[81,5] class, interface, or enum expected
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.

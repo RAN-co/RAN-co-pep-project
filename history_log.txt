@@ -1,7 +1,7 @@
-commit 636642e2e36beeee206ed5f05b943790128b0869
+commit 31cbd54b6ff387ffcb0df13a4e693f8bebf495e3
 Author: RAN-co <artyrebrina@gmail.com>
-Date:   Sun Feb 5 16:49:11 2023 +0000
+Date:   Tue Feb 7 20:34:29 2023 +0000
 
-    userStory1 upd
+    userStory_1 edits
 
- 5 files changed, 176 insertions(+), 9 deletions(-)
+ 3 files changed, 52 insertions(+), 76 deletions(-)
