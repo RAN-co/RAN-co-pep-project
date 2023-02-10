@@ -27,10 +27,14 @@ public class SocialMediaController {
         Javalin app = Javalin.create();
         socialMediaBlogService = new SocialMediaBlogService ();
         
-
-        //#1 Account registration
-        
-        app.post("localhost:8080/register", this::accountRegistrationHandler);
+        app.post("/register", this::accountRegistrationHandler);
+       app.post("/login", this::userLoginHandler);
+       // app.post("/messages", this::newMessageCreationHandler);
+       // app.get("/messages", this::retrieveAllMessagesHandler);
+       // app.patch("/messages/{message_id}", this::updateMessageByIdHandler);
+       // app.get("/messages/{message_id}", this::retrieveMessageByIdHandler);
+       // app.delete("/messages/{message_id}", this::deleteMessageByIdHandler);
+       // app.get("/accounts/{account_id}/messages", this::retrieveAllMessagesByParticularUserHandler);
 
         return app;
     }
@@ -40,14 +44,30 @@ public class SocialMediaController {
             ObjectMapper om = new ObjectMapper();
             Account account = om.readValue(ctx.body(), Account.class);
             Account createdAccount = socialMediaBlogService.addAccount(account);
-            if(createdAccount == null || account.getUsername() == null || account.getPassword().length() < 4){
-                ctx.status(400);
+            if(createdAccount != null && !account.getUsername().isBlank() && account.getPassword().length() > 4){
+
+                ctx.json(om.writeValueAsString(createdAccount));
                 
             }else{
-                ctx.json(om.writeValueAsString(createdAccount));
+                ctx.status(400);
             }
      }
-    
+
+     private void userLoginHandler(Context ctx) throws JsonProcessingException {
+            
+        ObjectMapper om = new ObjectMapper();
+        Account account = om.readValue(ctx.body(), Account.class);
+        Account createdAccount = socialMediaBlogService.addAccount(account);
+        if(createdAccount != null && !account.getUsername().isBlank() && account.getPassword().length() > 4){
+            List<Account> loginDetails = socialMediaBlogService.loginAuthorization();
+            ctx.json(loginDetails);
+            
+        }else{
+            ctx.status(401);
+        }
+ }
+
+
 /*
      //#2 login
      app.post("localhost:8080/login", ctx -> {
@@ -73,14 +93,13 @@ public class SocialMediaController {
 
     */
 
-        
-
-
-    /**
+    /*
      * This is an example handler for an example endpoint.
      * @param context The Javalin Context object manages information about both the HTTP request and response.
      */
+
     private void exampleHandler(Context context) {
         context.json("sample text");
     }
+    
 }

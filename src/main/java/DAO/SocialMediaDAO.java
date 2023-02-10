@@ -14,12 +14,9 @@ public class SocialMediaDAO {
 public Account addAccount(Account account){
     Connection connection = ConnectionUtil.getConnection();
     try {
-        //Write SQL logic here. When inserting, you only need to define the departure_city and arrival_city
-        //values (two columns total!)
         String sql = "INSERT INTO account (username, password) VALUES (?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-        //write preparedStatement's setString and setInt methods here.
         preparedStatement.setString(1, account.username);
         preparedStatement.setString(2, account.password);
 
@@ -34,4 +31,30 @@ public Account addAccount(Account account){
     }
     return null;
 }
+
+public Account loginAuthorization(String username, String password) {
+    Connection connection = ConnectionUtil.getConnection();
+    try {
+
+        String sql = "SELECT * FROM account WHERE username, password VALUES (?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, password);
+
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+            Account account = new Account(rs.getString("username"),
+                    rs.getString("password"));
+            return account;
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+    return null;
+}
+
+
+
+
 }

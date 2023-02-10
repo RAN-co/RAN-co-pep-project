@@ -6,19 +6,21 @@ import DAO.SocialMediaDAO;
 
 public class SocialMediaBlogService {
     public SocialMediaDAO socialMediaDAO;
+
     public SocialMediaBlogService(){
        this.socialMediaDAO = new SocialMediaDAO();
     }
 
-//not necesserly, the code would allow the testing of SocialMediaBlogService independently of SocialMediaDAO
-    public SocialMediaBlogService(SocialMediaDAO socialMediaDAO){
-        this.socialMediaDAO = socialMediaDAO;
-    }
-
     public Account addAccount(Account account){
+    
         return socialMediaDAO.addAccount(account);
+        }
+
+    public Account loginAuthorization (Account account) {
+
+        Account username = this.socialMediaDAO.loginAuthorization(account.getUsername());
+        if(isbn != null) return null;
+        return bookDAO.insertBook(book);
     }
-
-
 
 }
