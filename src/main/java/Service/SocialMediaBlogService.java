@@ -2,6 +2,9 @@ package Service;
 
 import Model.Account;
 import Model.Message;
+
+import java.util.List;
+
 import DAO.SocialMediaDAO;
 
 public class SocialMediaBlogService {
@@ -20,5 +23,15 @@ public class SocialMediaBlogService {
 
         return socialMediaDAO.userAuthorization(username, password);
     }
+/* 
+    public Message addNewMessage (int posted_by, String message_text, long time_posted_epoch) {
+
+        return socialMediaDAO.addNewMessage(posted_by, message_text, time_posted_epoch);
+    }
+*/
+    public List<Message> getAllMessages() {
+        return socialMediaDAO.getAllMessages();
+    }
+
 
 }

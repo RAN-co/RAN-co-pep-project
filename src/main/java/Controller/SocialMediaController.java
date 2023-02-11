@@ -5,7 +5,9 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import DAO.SocialMediaDAO;
 import Model.Account;
+import Model.Message;
 import Service.SocialMediaBlogService;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -29,10 +31,10 @@ public class SocialMediaController {
         Javalin app = Javalin.create();
         socialMediaBlogService = new SocialMediaBlogService ();
         
-        app.post("/register", this::accountRegistrationHandler);
-       app.post("/login", this::userAuthorizationHandler);
-       // app.post("/messages", this::newMessageCreationHandler);
-       // app.get("/messages", this::retrieveAllMessagesHandler);
+        app.post("/register", this::accountRegistrationHandler); //OK
+        app.post("/login", this::userAuthorizationHandler);  // equals?!
+        //app.post("/messages", this::newMessageCreationHandler);
+        app.get("/messages", this::getAllMessagesHandler);  // OK
        // app.patch("/messages/{message_id}", this::updateMessageByIdHandler);
        // app.get("/messages/{message_id}", this::retrieveMessageByIdHandler);
        // app.delete("/messages/{message_id}", this::deleteMessageByIdHandler);
@@ -61,40 +63,34 @@ public class SocialMediaController {
         Account accountInfo = om.readValue(ctx.body(), Account.class);
         Account accAuthorization = socialMediaBlogService.userAuthorization(accountInfo.getUsername(), accountInfo.getPassword());
         
-        if(accAuthorization != null && accountInfo.getUsername() != ){
-           
+        if(accAuthorization != null /*&& accountInfo.getUsername().equals(account.username) && accountInfo.getPassword.equals(account.password) */){
+            
             ctx.json(accAuthorization);
             
         }else{
             ctx.status(401);
         }
  }
-
-
 /*
-     //#2 login
-     app.post("localhost:8080/login", ctx -> {
-        
-     });
-        
-//#3 creation of new messages
-    app.post("localhost:8080/messages", ctx -> {
-    
-        Message message = om.readValue(ctx.body(), Message.class);
-        Message newMessage = messageService.addMessage(message);
-        if(!message.getMessageText().isBlank() && message.getMessageText().length() < 255 && userExists(message.getPostedBy())) {
-            int messageId = persistMessage(message);
-            message.setMessageId(messageId);
-            ctx.json(message);
-            ){
-            ctx.json(om.writeValueAsString(newMessage));
-        }else{
-            ctx.status(400);
-        }
+ private void newMessageCreationHandler(Context ctx) throws JsonProcessingException {
+            
+    ObjectMapper om = new ObjectMapper();
+    Message message = om.readValue(ctx.body(), Message.class);
+    Message newMessage = socialMediaBlogService.addNewMessage(posted_by, message_text, time_posted_epoch);
+    if(message_text != null && message_text.length() < 255 && posted_by == posted_by){
 
-    );}}
+        ctx.json(om.writeValueAsString(newMessage));
+        
+    }else{
+        ctx.status(400);
+    }
+}
+*/
+public void getAllMessagesHandler(Context ctx){
+    List<Message> messages = socialMediaBlogService.getAllMessages();
+    ctx.json(messages);
+}
 
-    */
 
     /*
      * This is an example handler for an example endpoint.
