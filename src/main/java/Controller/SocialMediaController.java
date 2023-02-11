@@ -35,8 +35,9 @@ public class SocialMediaController {
         app.post("/login", this::userAuthorizationHandler);  // equals?!
         //app.post("/messages", this::newMessageCreationHandler);
         app.get("/messages", this::getAllMessagesHandler);  // OK
-       // app.patch("/messages/{message_id}", this::updateMessageByIdHandler);
-       // app.get("/messages/{message_id}", this::retrieveMessageByIdHandler);
+        app.get("/messages/{message_id}", this::getMessageByIdHandler);
+        //app.patch("/messages/{message_id}", this::updateMessageByIdHandler);
+       
        // app.delete("/messages/{message_id}", this::deleteMessageByIdHandler);
        // app.get("/accounts/{account_id}/messages", this::retrieveAllMessagesByParticularUserHandler);
 
@@ -90,6 +91,12 @@ public void getAllMessagesHandler(Context ctx){
     List<Message> messages = socialMediaBlogService.getAllMessages();
     ctx.json(messages);
 }
+
+private void getMessageByIdHandler(Context context) {
+    context.json(socialMediaBlogService.getMessageById());
+}
+
+
 
 
     /*

@@ -33,5 +33,10 @@ public class SocialMediaBlogService {
         return socialMediaDAO.getAllMessages();
     }
 
+    public List<Message> getMessageById() {
+
+         return socialMediaDAO.getMessageById(int);
+    }
+
 
 }
