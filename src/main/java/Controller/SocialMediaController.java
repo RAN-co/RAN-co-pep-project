@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.List;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -28,7 +30,7 @@ public class SocialMediaController {
         socialMediaBlogService = new SocialMediaBlogService ();
         
         app.post("/register", this::accountRegistrationHandler);
-       app.post("/login", this::userLoginHandler);
+       app.post("/login", this::userAuthorizationHandler);
        // app.post("/messages", this::newMessageCreationHandler);
        // app.get("/messages", this::retrieveAllMessagesHandler);
        // app.patch("/messages/{message_id}", this::updateMessageByIdHandler);
@@ -53,14 +55,15 @@ public class SocialMediaController {
             }
      }
 
-     private void userLoginHandler(Context ctx) throws JsonProcessingException {
+     private void userAuthorizationHandler(Context ctx) throws JsonProcessingException {
             
         ObjectMapper om = new ObjectMapper();
-        Account account = om.readValue(ctx.body(), Account.class);
-        Account createdAccount = socialMediaBlogService.addAccount(account);
-        if(createdAccount != null && !account.getUsername().isBlank() && account.getPassword().length() > 4){
-            List<Account> loginDetails = socialMediaBlogService.loginAuthorization();
-            ctx.json(loginDetails);
+        Account accountInfo = om.readValue(ctx.body(), Account.class);
+        Account accAuthorization = socialMediaBlogService.userAuthorization(accountInfo.getUsername(), accountInfo.getPassword());
+        
+        if(accAuthorization != null && accountInfo.getUsername() != ){
+           
+            ctx.json(accAuthorization);
             
         }else{
             ctx.status(401);

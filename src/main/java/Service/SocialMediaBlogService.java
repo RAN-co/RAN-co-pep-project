@@ -16,11 +16,9 @@ public class SocialMediaBlogService {
         return socialMediaDAO.addAccount(account);
         }
 
-    public Account loginAuthorization (Account account) {
+    public Account userAuthorization (String username, String password) {
 
-        Account username = this.socialMediaDAO.loginAuthorization(account.getUsername());
-        if(isbn != null) return null;
-        return bookDAO.insertBook(book);
+        return socialMediaDAO.userAuthorization(username, password);
     }
 
 }

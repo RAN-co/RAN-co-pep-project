@@ -32,7 +32,7 @@ public Account addAccount(Account account){
     return null;
 }
 
-public Account loginAuthorization(String username, String password) {
+public Account userAuthorization(String username, String password) {
     Connection connection = ConnectionUtil.getConnection();
     try {
 

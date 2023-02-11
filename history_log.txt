@@ -1,7 +1,7 @@
-commit ff4d6d68cf68f61d4f7da24fbfd4a0bcb6bb6222
+commit 33d6b84a592596068c7a3d66d7862949fdeaaf1f
 Author: RAN-co <artyrebrina@gmail.com>
-Date:   Thu Feb 9 23:16:01 2023 +0000
+Date:   Fri Feb 10 02:39:07 2023 +0000
 
-    ep1-ending edits
+    ep1-ok; ep-2 85%
 
- 4 files changed, 4254 insertions(+), 47 deletions(-)
+ 5 files changed, 391 insertions(+), 3174 deletions(-)
