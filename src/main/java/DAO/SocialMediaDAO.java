@@ -56,7 +56,7 @@ public Account userAuthorization(String username, String password) {
     }
     return null;
 }
-/*
+
 public Message addNewMessage(Message message){
     Connection connection = ConnectionUtil.getConnection();
     try {
@@ -79,7 +79,7 @@ public Message addNewMessage(Message message){
     }
     return null;
 }
-*/
+/*
 public List<Message> getAllMessages(){
     Connection connection = ConnectionUtil.getConnection();
     List<Message> messages = new ArrayList<>();
@@ -100,6 +100,8 @@ public List<Message> getAllMessages(){
     }
     return messages;
 }
+
+ */
 
 public Message getMessageById(int message_id){
     Connection connection = ConnectionUtil.getConnection();
@@ -124,6 +126,65 @@ public Message getMessageById(int message_id){
     return null;
 }
 
+public Message deleteMessage(int messageId) {
+    Connection connection = ConnectionUtil.getConnection();
+    try {
+    String sql = "DELETE FROM message WHERE message_id = ?";
+    PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
+    preparedStatement.setInt(1, messageId);
+
+    int affectedRows = preparedStatement.executeUpdate();
+
+    if (affectedRows > 0) {
+        Message deletedMessage = getMessageById(messageId);
+        return deletedMessage;
+    }
+} catch (SQLException e) {
+    System.out.println(e.getMessage());
+}
+return null;
+}
+
+public Message updateMessage(int messageId, String messageText) {
+    Connection connection = ConnectionUtil.getConnection();
+    try {
+        String sql = "UPDATE message SET message_text = ? WHERE message_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, messageText);
+        preparedStatement.setInt(2, messageId);
+
+        int rowsAffected = preparedStatement.executeUpdate();
+        if (rowsAffected > 0) {
+            return getMessageById(messageId);
+        } else {
+            return null;
+        }
+    } catch (SQLException e) {
+        System.out.println("Error updating message: " + e.getMessage());
+        return null;
+    }
+}
+
+public List<Message> getMessagesByAccountId(int accountId) {
+    List<Message> messages = new ArrayList<>();
+    Connection connection = ConnectionUtil.getConnection();
+    try {
+      String sql = "SELECT * FROM message WHERE posted_by = ?";
+      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setInt(1, accountId);
+      ResultSet rs = preparedStatement.executeQuery();
+      while (rs.next()) {
+        Message message = new Message(rs.getInt("message_id"),
+                                      rs.getInt("posted_by"),
+                                      rs.getString("message_text"),
+                                      rs.getLong("time_posted_epoch"));
+        messages.add(message);
+      }
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+    return messages;
+  }
 
 }

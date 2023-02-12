@@ -36,11 +36,11 @@ public class SocialMediaController {
         app.post("/register", this::accountRegistrationHandler); //OK
         app.post("/login", this::userAuthorizationHandler);  // equals?!
         //app.post("/messages", this::newMessageCreationHandler);  // issues
-        app.get("/messages", this::getAllMessagesHandler);  // OK
+       // app.get("/messages", this::getAllMessagesHandler);  // OK
         app.get("/messages/{message_id}", this::getMessageByIdHandler);
-        //app.delete("/messages/{message_id}", this::deleteMessageByIdHandler);
-        //app.patch("/messages/{message_id}", this::updateMessageByIdHandler);
-       // app.get("/accounts/{account_id}/messages", this::retrieveAllMessagesByParticularUserHandler);
+        app.delete("/messages/{message_id}", this::deleteMessageByIdHandler);
+        app.patch("/messages/{message_id}", this::updateMessageByIdHandler); // issue in DAO
+        app.get("/accounts/{account_id}/messages", this::getAllMessagesByUserHandler);
 
         return app;
     }
@@ -65,7 +65,7 @@ public class SocialMediaController {
         Account accountInfo = om.readValue(ctx.body(), Account.class);
         Account accAuthorization = socialMediaBlogService.userAuthorization(accountInfo.getUsername(), accountInfo.getPassword());
         
-        if(accAuthorization != null && accountInfo.getUsername().equals() && accountInfo.getPassword().equals()){
+        if(accAuthorization != null){
             
             ctx.json(accAuthorization);
             
@@ -73,7 +73,7 @@ public class SocialMediaController {
             ctx.status(401);
         }
  }
-/*
+
  private void newMessageCreationHandler(Context ctx) throws JsonProcessingException {
             
     ObjectMapper om = new ObjectMapper();
@@ -87,24 +87,57 @@ public class SocialMediaController {
         ctx.status(400);
     }
 }
-*/
+/*
 public void getAllMessagesHandler(Context ctx){
     List<Message> messages = socialMediaBlogService.getAllMessages();
     ctx.json(messages);
 }
+ */
 
 private void getMessageByIdHandler(Context ctx) {
-   // ctx.json(socialMediaBlogService.getMessageById());
+    int messageId = Integer.parseInt(ctx.pathParam("message_id"));
+    ctx.json(socialMediaBlogService.getMessageById(messageId));
+    ctx.pathParam("message_id");
 
+/* 
     int messageId = Integer.parseInt(ctx.pathParam("message_id"));
     Message message = socialMediaDAO.getMessageById(messageId);
-    if (message != null) {
         ctx.json(message);
-    } 
-    
+*/    
 }
 
 
+private Context deleteMessageByIdHandler(Context ctx){
+    int messageId = Integer.parseInt(ctx.pathParam("message_id"));
+
+        Message deletedMessage = socialMediaDAO.deleteMessage(messageId);
+
+        if (deletedMessage != null) {
+            return ctx.json(deletedMessage);
+        } else {
+            ctx.status(200);
+            return ctx.result("");
+        }
+}
+
+public Context updateMessageByIdHandler(Context ctx) {
+   
+        int messageId = Integer.parseInt(ctx.pathParam("message_id"));
+        String messageText = ctx.body();
+
+        Message updatedMessage = socialMediaBlogService.updateMessage(messageId, messageText);
+        if (updatedMessage != null) {
+            return ctx.status(200).json(updatedMessage);
+        } else {
+            return ctx.status(400);
+        }
+    }
+    public Context getAllMessagesByUserHandler(Context ctx) {
+    
+        int accountId = Integer.parseInt(ctx.pathParam("account_id"));
+        List<Message> messages = socialMediaBlogService.getMessagesByAccountId(accountId);
+        return ctx.json(messages);
+      }
 
 
     /*
