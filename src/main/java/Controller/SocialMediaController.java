@@ -33,12 +33,11 @@ public class SocialMediaController {
         
         app.post("/register", this::accountRegistrationHandler); //OK
         app.post("/login", this::userAuthorizationHandler);  // equals?!
-        //app.post("/messages", this::newMessageCreationHandler);
+        //app.post("/messages", this::newMessageCreationHandler);  // issues
         app.get("/messages", this::getAllMessagesHandler);  // OK
         app.get("/messages/{message_id}", this::getMessageByIdHandler);
+        //app.delete("/messages/{message_id}", this::deleteMessageByIdHandler);
         //app.patch("/messages/{message_id}", this::updateMessageByIdHandler);
-       
-       // app.delete("/messages/{message_id}", this::deleteMessageByIdHandler);
        // app.get("/accounts/{account_id}/messages", this::retrieveAllMessagesByParticularUserHandler);
 
         return app;
@@ -64,7 +63,7 @@ public class SocialMediaController {
         Account accountInfo = om.readValue(ctx.body(), Account.class);
         Account accAuthorization = socialMediaBlogService.userAuthorization(accountInfo.getUsername(), accountInfo.getPassword());
         
-        if(accAuthorization != null /*&& accountInfo.getUsername().equals(account.username) && accountInfo.getPassword.equals(account.password) */){
+        if(accAuthorization != null && accountInfo.getUsername().equals() && accountInfo.getPassword().equals()){
             
             ctx.json(accAuthorization);
             
