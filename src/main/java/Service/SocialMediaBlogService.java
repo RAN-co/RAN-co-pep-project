@@ -5,6 +5,7 @@ import Model.Message;
 
 import java.util.List;
 
+import Controller.SocialMediaController;
 import DAO.SocialMediaDAO;
 
 public class SocialMediaBlogService {
@@ -35,7 +36,7 @@ public class SocialMediaBlogService {
 
     public List<Message> getMessageById() {
 
-         return socialMediaDAO.getMessageById(int);
+         return socialMediaDAO.getMessageById(SocialMediaController.getMessageByIdHandler.messageId);
     }
 
 

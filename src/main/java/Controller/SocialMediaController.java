@@ -22,6 +22,8 @@ import io.javalin.http.Context;
 public class SocialMediaController {
 
     public SocialMediaBlogService socialMediaBlogService;
+    public SocialMediaDAO socialMediaDAO;
+
     /**
      * In order for the test cases to work, you will need to write the endpoints in the startAPI() method, as the test
      * suite must receive a Javalin object from this method.
@@ -91,8 +93,15 @@ public void getAllMessagesHandler(Context ctx){
     ctx.json(messages);
 }
 
-private void getMessageByIdHandler(Context context) {
-    context.json(socialMediaBlogService.getMessageById());
+private void getMessageByIdHandler(Context ctx) {
+   // ctx.json(socialMediaBlogService.getMessageById());
+
+    int messageId = Integer.parseInt(ctx.pathParam("message_id"));
+    Message message = socialMediaDAO.getMessageById(messageId);
+    if (message != null) {
+        ctx.json(message);
+    } 
+    
 }
 
 
