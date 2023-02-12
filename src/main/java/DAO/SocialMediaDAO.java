@@ -79,7 +79,7 @@ public Message addNewMessage(Message message){
     }
     return null;
 }
-/*
+
 public List<Message> getAllMessages(){
     Connection connection = ConnectionUtil.getConnection();
     List<Message> messages = new ArrayList<>();
@@ -101,7 +101,7 @@ public List<Message> getAllMessages(){
     return messages;
 }
 
- */
+ 
 
 public Message getMessageById(int message_id){
     Connection connection = ConnectionUtil.getConnection();

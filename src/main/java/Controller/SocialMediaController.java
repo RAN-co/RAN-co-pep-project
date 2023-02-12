@@ -35,12 +35,12 @@ public class SocialMediaController {
         
         app.post("/register", this::accountRegistrationHandler); //OK
         app.post("/login", this::userAuthorizationHandler);  // equals?!
-        //app.post("/messages", this::newMessageCreationHandler);  // issues
-       // app.get("/messages", this::getAllMessagesHandler);  // OK
+        app.post("/messages", this::newMessageCreationHandler);  // OK
+        app.get("/messages", this::getAllMessagesHandler);  // OK
         app.get("/messages/{message_id}", this::getMessageByIdHandler);
-        app.delete("/messages/{message_id}", this::deleteMessageByIdHandler);
+        app.delete("/messages/{message_id}", this::deleteMessageByIdHandler); // Port issues
         app.patch("/messages/{message_id}", this::updateMessageByIdHandler); // issue in DAO
-        app.get("/accounts/{account_id}/messages", this::getAllMessagesByUserHandler);
+        app.get("/accounts/{account_id}/messages", this::getAllMessagesByUserHandler); //OK
 
         return app;
     }
@@ -78,8 +78,8 @@ public class SocialMediaController {
             
     ObjectMapper om = new ObjectMapper();
     Message message = om.readValue(ctx.body(), Message.class);
-    Message newMessage = socialMediaBlogService.addNewMessage(posted_by, message_text, time_posted_epoch);
-    if(message_text != null && message_text.length() < 255 && posted_by == posted_by){
+    Message newMessage = socialMediaBlogService.addNewMessage(message);
+    if(newMessage != null){ //&& message_text.length() < 255 && posted_by == posted_by
 
         ctx.json(om.writeValueAsString(newMessage));
         
@@ -87,30 +87,24 @@ public class SocialMediaController {
         ctx.status(400);
     }
 }
-/*
+
 public void getAllMessagesHandler(Context ctx){
     List<Message> messages = socialMediaBlogService.getAllMessages();
     ctx.json(messages);
 }
- */
+ 
 
 private void getMessageByIdHandler(Context ctx) {
     int messageId = Integer.parseInt(ctx.pathParam("message_id"));
     ctx.json(socialMediaBlogService.getMessageById(messageId));
-    ctx.pathParam("message_id");
-
-/* 
-    int messageId = Integer.parseInt(ctx.pathParam("message_id"));
-    Message message = socialMediaDAO.getMessageById(messageId);
-        ctx.json(message);
-*/    
+    ctx.pathParam("message_id");   
 }
 
 
 private Context deleteMessageByIdHandler(Context ctx){
     int messageId = Integer.parseInt(ctx.pathParam("message_id"));
 
-        Message deletedMessage = socialMediaDAO.deleteMessage(messageId);
+        Message deletedMessage = socialMediaBlogService.deleteMessage(messageId);
 
         if (deletedMessage != null) {
             return ctx.json(deletedMessage);

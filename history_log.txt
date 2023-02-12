@@ -1,7 +1,7 @@
-commit fedb7e5c320c733c19136ecf8aa2302df8d156c9
+commit 705080f7d20dd1094e3700d0560e20e075b8b263
 Author: RAN-co <artyrebrina@gmail.com>
-Date:   Sun Feb 12 17:26:07 2023 +0000
+Date:   Sun Feb 12 22:50:42 2023 +0000
 
-    ep5-processing
+    all ep  - raw status
 
- 4 files changed, 142 insertions(+), 38 deletions(-)
+ 5 files changed, 155 insertions(+), 46 deletions(-)

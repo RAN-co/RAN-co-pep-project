@@ -25,15 +25,18 @@ public class SocialMediaBlogService {
         return socialMediaDAO.userAuthorization(username, password);
     }
 
-    public Message addNewMessage (int posted_by, String message_text, long time_posted_epoch) {
+    public Message addNewMessage (Message message) {
 
-        return socialMediaDAO.addNewMessage(posted_by, message_text, time_posted_epoch);
+        if (message.getMessage_text() == null || message.getMessage_text().trim().length() == 0 || message.getMessage_text().length() > 255) {
+            return null;
+        }
+        return socialMediaDAO.addNewMessage(message);
     }
-/*
+
     public List<Message> getAllMessages() {
         return socialMediaDAO.getAllMessages();
     }
- */
+ 
     public Message getMessageById(int message_id) {
 
          return socialMediaDAO.getMessageById(message_id);
