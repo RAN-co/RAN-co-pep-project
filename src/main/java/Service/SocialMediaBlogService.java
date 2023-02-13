@@ -5,7 +5,6 @@ import Model.Message;
 
 import java.util.List;
 
-import Controller.SocialMediaController;
 import DAO.SocialMediaDAO;
 
 public class SocialMediaBlogService {

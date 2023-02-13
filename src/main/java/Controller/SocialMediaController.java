@@ -114,6 +114,23 @@ private Context deleteMessageByIdHandler(Context ctx){
         }
 }
 
+
+private void updateMessageByIdHandler(Context ctx) throws JsonProcessingException {
+    ObjectMapper om = new ObjectMapper();
+    Message message = om.readValue(ctx.body(), Message.class);
+    int message_id = Integer.parseInt(ctx.pathParam("message_id"));
+    Message updatedMessage = socialMediaBlogService.updateMessage(message_id, message.getMessage_text());
+    System.out.println(updatedMessage);
+    if(updatedMessage == null){
+        ctx.status(400);
+    }else{
+        ctx.json(om.writeValueAsString(updatedMessage));
+    }
+
+}
+
+
+/*
 public Context updateMessageByIdHandler(Context ctx) {
    
         int messageId = Integer.parseInt(ctx.pathParam("message_id"));
@@ -126,6 +143,8 @@ public Context updateMessageByIdHandler(Context ctx) {
             return ctx.status(400);
         }
     }
+*/
+
     public Context getAllMessagesByUserHandler(Context ctx) {
     
         int accountId = Integer.parseInt(ctx.pathParam("account_id"));
