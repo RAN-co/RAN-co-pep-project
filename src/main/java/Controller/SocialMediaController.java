@@ -79,7 +79,7 @@ public class SocialMediaController {
     ObjectMapper om = new ObjectMapper();
     Message message = om.readValue(ctx.body(), Message.class);
     Message newMessage = socialMediaBlogService.addNewMessage(message);
-    if(newMessage != null){ //&& message_text.length() < 255 && posted_by == posted_by
+    if(newMessage != null){
 
         ctx.json(om.writeValueAsString(newMessage));
         
@@ -101,17 +101,20 @@ private void getMessageByIdHandler(Context ctx) {
 }
 
 
-private Context deleteMessageByIdHandler(Context ctx){
+private void deleteMessageByIdHandler(Context ctx){
     int messageId = Integer.parseInt(ctx.pathParam("message_id"));
-
-        Message deletedMessage = socialMediaBlogService.deleteMessage(messageId);
-
+    ctx.json(socialMediaBlogService.getMessageById(messageId));
+    ctx.pathParam("message_id");   
+        
+/*
+Message deletedMessage = socialMediaBlogService.deleteMessage(messageId);
         if (deletedMessage != null) {
             return ctx.json(deletedMessage);
         } else {
             ctx.status(200);
             return ctx.result("");
         }
+ */
 }
 
 

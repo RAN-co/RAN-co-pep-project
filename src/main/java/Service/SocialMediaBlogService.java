@@ -41,9 +41,9 @@ public class SocialMediaBlogService {
          return socialMediaDAO.getMessageById(message_id);
     }
 
-    public Message deleteMessage(int messageId) {
+    public Message deleteMessage(int message_id) {
 
-        return socialMediaDAO.deleteMessage(messageId);
+        return socialMediaDAO.deleteMessage(message_id);
     }
 
     public Message updateMessage(int messageId, String messageText) {

@@ -126,25 +126,43 @@ public Message getMessageById(int message_id){
     return null;
 }
 
-public Message deleteMessage(int messageId) {
+public Message deleteMessage(int message_id) {
     Connection connection = ConnectionUtil.getConnection();
+    
     try {
+
     String sql = "DELETE FROM message WHERE message_id = ?";
     PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-    preparedStatement.setInt(1, messageId);
-
+    preparedStatement.setInt(1, message_id);
+    
     int affectedRows = preparedStatement.executeUpdate();
 
     if (affectedRows > 0) {
-        Message deletedMessage = getMessageById(messageId);
+        Message deletedMessage = getMessageById(message_id);
+        return deletedMessage;
+    }else {
+        return null;
+    }
+
+} catch (SQLException e) {
+    System.out.println(e.getMessage());
+}
+return null;
+}
+
+/*
+    int affectedRows = preparedStatement.executeUpdate();
+
+    if (affectedRows > 0) {
+        Message deletedMessage = getMessageById(message_id);
         return deletedMessage;
     }
 } catch (SQLException e) {
     System.out.println(e.getMessage());
 }
 return null;
-}
+} */
 
 public Message updateMessage(int messageId, String messageText) {
     Connection connection = ConnectionUtil.getConnection();
