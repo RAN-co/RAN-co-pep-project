@@ -1,7 +1,7 @@
-commit 5d4bb2dd7c5535796e98f96007429993d0504d30
+commit 16ffff38467fba9d336121e651f6f8bb2a6e3d6b
 Author: RAN-co <artyrebrina@gmail.com>
-Date:   Mon Feb 13 18:34:34 2023 +0000
+Date:   Mon Feb 13 19:26:39 2023 +0000
 
-    all ep - 90%
+    all ep. 3 tests to pass
 
- 4 files changed, 73 insertions(+), 657 deletions(-)
+ 5 files changed, 49 insertions(+), 174 deletions(-)

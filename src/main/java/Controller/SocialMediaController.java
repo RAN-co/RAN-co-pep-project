@@ -54,12 +54,40 @@ public class SocialMediaController {
 
                 ctx.json(om.writeValueAsString(createdAccount));
                 
-            }else{
+            }
+            /*
+            if (socialMediaDAO.usernameExists(account.getUsername())) {
+                ctx.status(400);
+                return;
+            }
+             */
+            else{
                 ctx.status(400);
             }
      }
 
-     private void userAuthorizationHandler(Context ctx) throws JsonProcessingException {
+     public Context userAuthorizationHandler(Context ctx)  {
+        try {
+        ObjectMapper om = new ObjectMapper();
+        Account accountInfo = om.readValue(ctx.body(), Account.class);
+        Account accAuthorization = socialMediaBlogService.userAuthorization(accountInfo.getUsername(), accountInfo.getPassword());
+        
+        if(accAuthorization != null){
+            
+            ctx.json(accAuthorization);
+            
+        }else{
+            ctx.status(401);
+            ctx.result("Unauthorized");
+        }}
+        catch (Exception e) {
+            ctx.status(500);
+            ctx.result("Internal Server Error");
+        } return ctx;
+
+ }
+
+/*private void userAuthorizationHandler(Context ctx) throws JsonProcessingException {
             
         ObjectMapper om = new ObjectMapper();
         Account accountInfo = om.readValue(ctx.body(), Account.class);
@@ -72,7 +100,8 @@ public class SocialMediaController {
         }else{
             ctx.status(401);
         }
- }
+ } 
+ */
 
  private void newMessageCreationHandler(Context ctx) throws JsonProcessingException {
             

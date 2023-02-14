@@ -34,6 +34,24 @@ public Account addAccount(Account account){
     }
     return null;
 }
+/*
+public boolean usernameExists(String username) {
+    Connection connection = ConnectionUtil.getConnection();
+    try {
+        String sql = "SELECT COUNT(*) FROM accounts WHERE username = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, username);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt(1) > 0;
+        }
+    } catch (SQLException e) {
+        
+    }
+    return false;
+} 
+*/
+
 
 public Account userAuthorization(String username, String password) {
     Connection connection = ConnectionUtil.getConnection();

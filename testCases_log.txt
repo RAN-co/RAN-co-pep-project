@@ -33,8 +33,8 @@ Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_E ON PUBLIC.ACCO
 INSERT INTO account (username, password) VALUES (?, ?) [23505-214]
 Syntax error in SQL statement "SELECT * FROM account WHERE username[*], password VALUES (?, ?)"; SQL statement:
 SELECT * FROM account WHERE username, password VALUES (?, ?) [42000-214]
-[ERROR] Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 9.429 s <<< FAILURE! - in AuthIntegrationTest
-[ERROR] AuthIntegrationTest.postRegisterThenPostLoginTest  Time elapsed: 1.047 s  <<< FAILURE!
+[ERROR] Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 8.701 s <<< FAILURE! - in AuthIntegrationTest
+[ERROR] AuthIntegrationTest.postRegisterThenPostLoginTest  Time elapsed: 1.044 s  <<< FAILURE!
 java.lang.AssertionError: expected:<200> but was:<401>
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.junit.Assert.failNotEquals(Assert.java:835)
@@ -91,17 +91,14 @@ Message{message_id=1, posted_by=1, message_text='updated message', time_posted_e
 null
 null
 null
-[ERROR] Tests run: 20, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 20.804 s <<< FAILURE! - in MessagingIntegrationTest
-[ERROR] MessagingIntegrationTest.deleteMessageTest  Time elapsed: 1.047 s  <<< ERROR!
-com.fasterxml.jackson.databind.exc.MismatchedInputException: 
-No content to map due to end-of-input
- at [Source: (String)""; line: 1, column: 0]
-	at com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:59)
-	at com.fasterxml.jackson.databind.ObjectMapper._initForReading(ObjectMapper.java:4788)
-	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4690)
-	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3652)
-	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3620)
-	at MessagingIntegrationTest.deleteMessageTest(MessagingIntegrationTest.java:414)
+[ERROR] Tests run: 20, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 20.759 s <<< FAILURE! - in MessagingIntegrationTest
+[ERROR] MessagingIntegrationTest.deleteMessageNonExistentMessageTest  Time elapsed: 1.033 s  <<< FAILURE!
+java.lang.AssertionError: expected:<200> but was:<500>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:647)
+	at org.junit.Assert.assertEquals(Assert.java:633)
+	at MessagingIntegrationTest.deleteMessageNonExistentMessageTest(MessagingIntegrationTest.java:391)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -144,17 +141,12 @@ No content to map due to end-of-input
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:595)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:581)
 
-[ERROR] MessagingIntegrationTest.deletedMessageShouldNotExistTest  Time elapsed: 1.046 s  <<< ERROR!
-com.fasterxml.jackson.databind.exc.MismatchedInputException: 
-No content to map due to end-of-input
- at [Source: (String)""; line: 1, column: 0]
-	at com.fasterxml.jackson.databind.exc.MismatchedInputException.from(MismatchedInputException.java:59)
-	at com.fasterxml.jackson.databind.ObjectMapper._initForReading(ObjectMapper.java:4788)
-	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4690)
-	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3652)
-	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3620)
-	at MessagingIntegrationTest.deleteMessageTest(MessagingIntegrationTest.java:414)
-	at MessagingIntegrationTest.deletedMessageShouldNotExistTest(MessagingIntegrationTest.java:426)
+[ERROR] MessagingIntegrationTest.deletedMessageShouldNotExistTest  Time elapsed: 1.048 s  <<< FAILURE!
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at MessagingIntegrationTest.deletedMessageShouldNotExistTest(MessagingIntegrationTest.java:432)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -202,19 +194,16 @@ No content to map due to end-of-input
 [INFO] 
 [ERROR] Failures: 
 [ERROR]   AuthIntegrationTest.postRegisterThenPostLoginTest:182 expected:<200> but was:<401>
-[ERROR] Errors: 
-[ERROR]   MessagingIntegrationTest.deleteMessageTest:414 » MismatchedInput No content to map due to end-of-input
- at [Source: (String)""; line: 1, column: 0]
-[ERROR]   MessagingIntegrationTest.deletedMessageShouldNotExistTest:426->deleteMessageTest:414 » MismatchedInput No content to map due to end-of-input
- at [Source: (String)""; line: 1, column: 0]
+[ERROR]   MessagingIntegrationTest.deleteMessageNonExistentMessageTest:391 expected:<200> but was:<500>
+[ERROR]   MessagingIntegrationTest.deletedMessageShouldNotExistTest:432
 [INFO] 
-[ERROR] Tests run: 27, Failures: 1, Errors: 2, Skipped: 0
+[ERROR] Tests run: 27, Failures: 3, Errors: 0, Skipped: 0
 [INFO] 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  37.962 s
-[INFO] Finished at: 2023-02-13T18:35:16Z
+[INFO] Total time:  35.561 s
+[INFO] Finished at: 2023-02-13T19:27:19Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M7:test (default-test) on project Challenges: There are test failures.
 [ERROR] 
