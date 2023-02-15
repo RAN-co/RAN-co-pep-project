@@ -33,14 +33,14 @@ public class SocialMediaController {
         Javalin app = Javalin.create();
         socialMediaBlogService = new SocialMediaBlogService ();
         
-        app.post("/register", this::accountRegistrationHandler); //OK
-        app.post("/login", this::userAuthorizationHandler);  // equals?!
-        app.post("/messages", this::newMessageCreationHandler);  // OK
-        app.get("/messages", this::getAllMessagesHandler);  // OK
+        app.post("/register", this::accountRegistrationHandler); 
+        app.post("/login", this::userAuthorizationHandler);  
+        app.post("/messages", this::newMessageCreationHandler);  
+        app.get("/messages", this::getAllMessagesHandler);  
         app.get("/messages/{message_id}", this::getMessageByIdHandler);
-        app.delete("/messages/{message_id}", this::deleteMessageByIdHandler); // Port issues
-        app.patch("/messages/{message_id}", this::updateMessageByIdHandler); // issue in DAO
-        app.get("/accounts/{account_id}/messages", this::getAllMessagesByUserHandler); //OK
+        app.delete("/messages/{message_id}", this::deleteMessageByIdHandler); 
+        app.patch("/messages/{message_id}", this::updateMessageByIdHandler); 
+        app.get("/accounts/{account_id}/messages", this::getAllMessagesByUserHandler); 
 
         return app;
     }
@@ -52,15 +52,9 @@ public class SocialMediaController {
             Account createdAccount = socialMediaBlogService.addAccount(account);
             if(createdAccount != null && !account.getUsername().isBlank() && account.getPassword().length() > 4){
 
-                ctx.json(om.writeValueAsString(createdAccount));
-                
+                ctx.json(om.writeValueAsString(createdAccount));   
             }
-            /*
-            if (socialMediaDAO.usernameExists(account.getUsername())) {
-                ctx.status(400);
-                return;
-            }
-             */
+           
             else{
                 ctx.status(400);
             }
@@ -87,22 +81,6 @@ public class SocialMediaController {
 
  }
 
-/*private void userAuthorizationHandler(Context ctx) throws JsonProcessingException {
-            
-        ObjectMapper om = new ObjectMapper();
-        Account accountInfo = om.readValue(ctx.body(), Account.class);
-        Account accAuthorization = socialMediaBlogService.userAuthorization(accountInfo.getUsername(), accountInfo.getPassword());
-        
-        if(accAuthorization != null){
-            
-            ctx.json(accAuthorization);
-            
-        }else{
-            ctx.status(401);
-        }
- } 
- */
-
  private void newMessageCreationHandler(Context ctx) throws JsonProcessingException {
             
     ObjectMapper om = new ObjectMapper();
@@ -122,30 +100,17 @@ public void getAllMessagesHandler(Context ctx){
     ctx.json(messages);
 }
  
-
 private void getMessageByIdHandler(Context ctx) {
     int messageId = Integer.parseInt(ctx.pathParam("message_id"));
     ctx.json(socialMediaBlogService.getMessageById(messageId));
     ctx.pathParam("message_id");   
 }
 
-
 private void deleteMessageByIdHandler(Context ctx){
     int messageId = Integer.parseInt(ctx.pathParam("message_id"));
     ctx.json(socialMediaBlogService.getMessageById(messageId));
     ctx.pathParam("message_id");   
-        
-/*
-Message deletedMessage = socialMediaBlogService.deleteMessage(messageId);
-        if (deletedMessage != null) {
-            return ctx.json(deletedMessage);
-        } else {
-            ctx.status(200);
-            return ctx.result("");
-        }
- */
 }
-
 
 private void updateMessageByIdHandler(Context ctx) throws JsonProcessingException {
     ObjectMapper om = new ObjectMapper();
@@ -158,24 +123,7 @@ private void updateMessageByIdHandler(Context ctx) throws JsonProcessingExceptio
     }else{
         ctx.json(om.writeValueAsString(updatedMessage));
     }
-
 }
-
-
-/*
-public Context updateMessageByIdHandler(Context ctx) {
-   
-        int messageId = Integer.parseInt(ctx.pathParam("message_id"));
-        String messageText = ctx.body();
-
-        Message updatedMessage = socialMediaBlogService.updateMessage(messageId, messageText);
-        if (updatedMessage != null) {
-            return ctx.status(200).json(updatedMessage);
-        } else {
-            return ctx.status(400);
-        }
-    }
-*/
 
     public Context getAllMessagesByUserHandler(Context ctx) {
     

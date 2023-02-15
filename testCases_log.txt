@@ -33,8 +33,8 @@ Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_E ON PUBLIC.ACCO
 INSERT INTO account (username, password) VALUES (?, ?) [23505-214]
 Syntax error in SQL statement "SELECT * FROM account WHERE username[*], password VALUES (?, ?)"; SQL statement:
 SELECT * FROM account WHERE username, password VALUES (?, ?) [42000-214]
-[ERROR] Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 8.701 s <<< FAILURE! - in AuthIntegrationTest
-[ERROR] AuthIntegrationTest.postRegisterThenPostLoginTest  Time elapsed: 1.044 s  <<< FAILURE!
+[ERROR] Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 8.892 s <<< FAILURE! - in AuthIntegrationTest
+[ERROR] AuthIntegrationTest.postRegisterThenPostLoginTest  Time elapsed: 1.048 s  <<< FAILURE!
 java.lang.AssertionError: expected:<200> but was:<401>
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.junit.Assert.failNotEquals(Assert.java:835)
@@ -91,8 +91,8 @@ Message{message_id=1, posted_by=1, message_text='updated message', time_posted_e
 null
 null
 null
-[ERROR] Tests run: 20, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 20.759 s <<< FAILURE! - in MessagingIntegrationTest
-[ERROR] MessagingIntegrationTest.deleteMessageNonExistentMessageTest  Time elapsed: 1.033 s  <<< FAILURE!
+[ERROR] Tests run: 20, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 21.038 s <<< FAILURE! - in MessagingIntegrationTest
+[ERROR] MessagingIntegrationTest.deleteMessageNonExistentMessageTest  Time elapsed: 1.037 s  <<< FAILURE!
 java.lang.AssertionError: expected:<200> but was:<500>
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.junit.Assert.failNotEquals(Assert.java:835)
@@ -141,7 +141,7 @@ java.lang.AssertionError: expected:<200> but was:<500>
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:595)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:581)
 
-[ERROR] MessagingIntegrationTest.deletedMessageShouldNotExistTest  Time elapsed: 1.048 s  <<< FAILURE!
+[ERROR] MessagingIntegrationTest.deletedMessageShouldNotExistTest  Time elapsed: 1.064 s  <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:87)
 	at org.junit.Assert.assertTrue(Assert.java:42)
@@ -202,8 +202,8 @@ java.lang.AssertionError
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  35.561 s
-[INFO] Finished at: 2023-02-13T19:27:19Z
+[INFO] Total time:  37.542 s
+[INFO] Finished at: 2023-02-14T01:16:48Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M7:test (default-test) on project Challenges: There are test failures.
 [ERROR] 

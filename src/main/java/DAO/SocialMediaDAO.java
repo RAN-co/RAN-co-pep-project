@@ -34,24 +34,6 @@ public Account addAccount(Account account){
     }
     return null;
 }
-/*
-public boolean usernameExists(String username) {
-    Connection connection = ConnectionUtil.getConnection();
-    try {
-        String sql = "SELECT COUNT(*) FROM accounts WHERE username = ?";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, username);
-        ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-            return resultSet.getInt(1) > 0;
-        }
-    } catch (SQLException e) {
-        
-    }
-    return false;
-} 
-*/
-
 
 public Account userAuthorization(String username, String password) {
     Connection connection = ConnectionUtil.getConnection();
@@ -78,7 +60,6 @@ public Account userAuthorization(String username, String password) {
 public Message addNewMessage(Message message){
     Connection connection = ConnectionUtil.getConnection();
     try {
-        
         String sql = "INSERT INTO message (posted_by, message_text, time_posted_epoch) values(?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -102,7 +83,6 @@ public List<Message> getAllMessages(){
     Connection connection = ConnectionUtil.getConnection();
     List<Message> messages = new ArrayList<>();
     try {
-        //Write SQL logic here
         String sql = "SELECT * FROM message";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet rs = preparedStatement.executeQuery();
@@ -119,12 +99,9 @@ public List<Message> getAllMessages(){
     return messages;
 }
 
- 
-
 public Message getMessageById(int message_id){
     Connection connection = ConnectionUtil.getConnection();
     try {
-
         String sql = "SELECT * FROM message WHERE message_id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -148,7 +125,6 @@ public Message deleteMessage(int message_id) {
     Connection connection = ConnectionUtil.getConnection();
     
     try {
-
     String sql = "DELETE FROM message WHERE message_id = ?";
     PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -168,19 +144,6 @@ public Message deleteMessage(int message_id) {
 }
 return null;
 }
-
-/*
-    int affectedRows = preparedStatement.executeUpdate();
-
-    if (affectedRows > 0) {
-        Message deletedMessage = getMessageById(message_id);
-        return deletedMessage;
-    }
-} catch (SQLException e) {
-    System.out.println(e.getMessage());
-}
-return null;
-} */
 
 public Message updateMessage(int messageId, String messageText) {
     Connection connection = ConnectionUtil.getConnection();
